@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Paint</title>
+<title>Pintar Nabote</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="titlebar"><span id="titletext">Sem título - Paint</span></div>
+<div id="titlebar"><span id="titletext">Sem título - Pintar Nabote</span></div>
 <div id="menubar"></div>
 
 <div id="textbar" hidden>
@@ -67,10 +67,20 @@
   </form>
 </dialog>
 
+<dialog id="dlgConfirm">
+  <form method="dialog">
+    <p id="confirmText"></p>
+    <div class="dlgbtns">
+      <button value="ok">OK</button>
+      <button value="cancel" id="confirmCancel">Cancelar</button>
+    </div>
+  </form>
+</dialog>
+
 <dialog id="dlgAbout">
   <form method="dialog">
-    <h3>Sobre o Paint</h3>
-    <p>Clone web do Paint clássico do Windows.<br>Feito com HTML5 Canvas, sem dependências.</p>
+    <h3>Sobre o Pintar Nabote</h3>
+    <p>Pintar Nabote: editor de imagens inspirado no Paint clássico do Windows.<br>Feito com HTML5 Canvas, sem dependências.</p>
     <div class="dlgbtns"><button value="ok">OK</button></div>
   </form>
 </dialog>

@@ -1,11 +1,11 @@
-# Paint (clone web do Paint clássico do Windows)
+# Pintar Nabote (inspirado no Paint clássico do Windows)
 
 Editor de imagens que roda direto no navegador, sem dependências nem instalação.
 Abra `index.html` ou sirva a pasta: `python3 -m http.server 8000` e acesse http://localhost:8000.
 
 ## Como o Paint clássico funciona (e como foi reproduzido)
 
-| Conceito do Paint | Implementação |
+| Conceito do Paint clássico | Implementação |
 |---|---|
 | Área de desenho bitmap, sem suavização | `<canvas>` com `image-rendering: pixelated`; lápis e pincel usam Bresenham, e as formas têm bordas sem anti-aliasing |
 | **Cor 1** (frente) e **Cor 2** (fundo) | Botão esquerdo desenha com a cor 1, botão direito com a cor 2. Duplo clique em uma cor abre o editor de cores |

@@ -141,8 +141,20 @@ function resizeCanvas(w, h) {
   mctx.drawImage(c, 0, 0);
 }
 
-function newImage(w = 800, h = 500) {
-  if (S.dirty && !confirm('Descartar as alterações da imagem atual?')) return;
+// diálogo próprio: confirm()/alert() do navegador não funcionam em contextos isolados
+function askDialog(message, { cancel = true } = {}) {
+  return new Promise(resolve => {
+    const dlg = $('#dlgConfirm');
+    $('#confirmText').textContent = message;
+    $('#confirmCancel').hidden = !cancel;
+    dlg.addEventListener('close', () => resolve(dlg.returnValue === 'ok'), { once: true });
+    dlg.returnValue = 'cancel';
+    dlg.showModal();
+  });
+}
+
+async function newImage(w = 800, h = 500) {
+  if (S.dirty && !(await askDialog('Descartar as alterações da imagem atual?'))) return;
   cancelGestures(); dropSelection(); cancelText();
   hist.undo.length = 0; hist.redo.length = 0;
   setSize(w, h); fillAll('#ffffff');
@@ -150,8 +162,8 @@ function newImage(w = 800, h = 500) {
 }
 
 function updateTitle() {
-  $('#titletext').textContent = `${S.name} - Paint`;
-  document.title = `${S.name} - Paint`;
+  $('#titletext').textContent = `${S.name} - Pintar Nabote`;
+  document.title = `${S.name} - Pintar Nabote`;
 }
 
 /* ───────────────────────── ferramentas de pixel ───────────────────────── */
@@ -841,10 +853,10 @@ function saveImage() {
 }
 
 function openFile() { $('#fileInput').click(); }
-$('#fileInput').addEventListener('change', e => {
+$('#fileInput').addEventListener('change', async e => {
   const f = e.target.files[0]; e.target.value = '';
   if (!f) return;
-  if (S.dirty && !confirm('Descartar as alterações da imagem atual?')) return;
+  if (S.dirty && !(await askDialog('Descartar as alterações da imagem atual?'))) return;
   const img = new Image();
   img.onload = () => {
     cancelGestures(); dropSelection(); cancelText();
@@ -853,7 +865,7 @@ $('#fileInput').addEventListener('change', e => {
     URL.revokeObjectURL(img.src);
     S.name = f.name; S.dirty = false; updateTitle();
   };
-  img.onerror = () => alert('Não foi possível abrir este arquivo de imagem.');
+  img.onerror = () => askDialog('Não foi possível abrir este arquivo de imagem.', { cancel: false });
   img.src = URL.createObjectURL(f);
 });
 
@@ -917,7 +929,7 @@ const MENUS = {
     ['Limpar imagem', 'Ctrl+Shift+N', clearImage],
   ],
   Cores: () => [['Editar cores...', '', () => editColor(-1, false)]],
-  Ajuda: () => [['Sobre o Paint', '', () => $('#dlgAbout').showModal()]],
+  Ajuda: () => [['Sobre o Pintar Nabote', '', () => $('#dlgAbout').showModal()]],
 };
 
 async function pasteFromSystem() {
