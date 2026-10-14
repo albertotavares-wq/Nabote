@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pintar Nabote</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="titlebar"><span id="titletext">Sem título - Pintar Nabote</span></div>
+<div id="menubar"></div>
+
+<div id="textbar" hidden>
+  <select id="fontFamily" title="Fonte">
+    <option>Arial</option><option>Times New Roman</option><option>Courier New</option>
+    <option>Verdana</option><option>Georgia</option><option>Comic Sans MS</option><option>Impact</option>
+  </select>
+  <select id="fontSize" title="Tamanho"></select>
+  <button id="fontBold" title="Negrito"><b>N</b></button>
+  <button id="fontItalic" title="Itálico"><i>I</i></button>
+  <button id="fontUnderline" title="Sublinhado"><u>S</u></button>
+</div>
+
+<div id="workspace">
+  <aside id="toolbox">
+    <div id="tools"></div>
+    <div id="options" class="sunken"></div>
+  </aside>
+  <div id="area" class="sunken">
+    <div id="stage">
+      <canvas id="main"></canvas>
+      <canvas id="over"></canvas>
+      <div id="grid"></div>
+      <div id="selbox" hidden></div>
+      <div id="resizeOutline" hidden></div>
+      <div id="handle" title="Arraste para redimensionar a imagem"></div>
+    </div>
+  </div>
+</div>
+
+<div id="colorbox">
+  <div id="current" class="sunken" title="Cor 1 (frente) e Cor 2 (fundo)">
+    <div id="bgbox"></div><div id="fgbox"></div>
+  </div>
+  <div id="palette"></div>
+</div>
+
+<div id="statusbar">
+  <span id="stHint" class="sunken">Para obter Ajuda, clique em Ajuda no menu.</span>
+  <span id="stPos" class="sunken"></span>
+  <span id="stSel" class="sunken"></span>
+  <span id="stSize" class="sunken"></span>
+</div>
+
+<input type="color" id="colorPicker" hidden>
+<input type="file" id="fileInput" accept="image/*" hidden>
+
+<dialog id="dlgAttr">
+  <form method="dialog">
+    <h3>Atributos</h3>
+    <label>Largura: <input type="number" id="attrW" min="1" max="4000" value="800"></label>
+    <label>Altura: <input type="number" id="attrH" min="1" max="4000" value="500"></label>
+    <div class="dlgbtns">
+      <button value="ok" id="attrOk">OK</button>
+      <button value="cancel">Cancelar</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgConfirm">
+  <form method="dialog">
+    <p id="confirmText"></p>
+    <div class="dlgbtns">
+      <button value="ok">OK</button>
+      <button value="cancel" id="confirmCancel">Cancelar</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgAbout">
+  <form method="dialog">
+    <h3>Sobre o Pintar Nabote</h3>
+    <p>Pintar Nabote: editor de imagens inspirado no Paint clássico do Windows.<br>Feito com HTML5 Canvas, sem dependências.</p>
+    <div class="dlgbtns"><button value="ok">OK</button></div>
+  </form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
